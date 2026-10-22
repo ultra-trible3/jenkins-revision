@@ -1,0 +1,87 @@
+Git Commands Guide - MI-Card Project
+1. معرفة الـ Branch الحالي
+git branch
+git status
+
+2. مراجعة الـ Commits
+git log --oneline -5
+git log --oneline --graph -10
+
+3. إنشاء نسخة احتياطية من main
+git branch backup-main-before-merge main
+
+
+ملاحظة: لو الـ backup موجود بالفعل، لا تنفذ الأمر مرة أخرى بنفس الاسم.
+
+4. الانتقال إلى Branch العمل
+git switch merge-main
+
+5. دمج main داخل Branch العمل
+git merge main
+
+
+لو ظهرت تعارضات (Conflicts)، حلّها ثم نفّذ:
+
+git add .
+git commit
+
+
+لا تنفذ commit إضافيًا لو Git أكمل الـ merge بالفعل وأنشأ commit تلقائيًا.
+
+6. مراجعة تفاصيل الـ Merge
+git log --oneline --graph -10
+git show --stat --oneline HEAD
+git show -s --format="%H%n%P%n%s" HEAD
+
+7. اختبار مشروع Django
+
+من داخل مجلد Backend:
+
+python manage.py check
+python manage.py runserver
+
+8. مراجعة التغييرات
+
+من مجلد المشروع الرئيسي:
+
+git diff main...merge-main --stat
+git status
+
+9. رفع Branch إلى GitHub
+git push -u origin merge-main
+
+10. تغيير اسم Branch محليًا
+
+وأنت واقف على الـ branch المطلوب:
+
+git branch -m modify-base-page
+
+11. رفع الاسم الجديد إلى GitHub
+git push -u origin modify-base-page
+
+12. حذف الاسم القديم من GitHub (اختياري)
+
+بعد التأكد من نجاح رفع الاسم الجديد:
+
+git push origin --delete merge-main
+
+
+
+-------------------------
+
+npx skills add flutter/skills --skill '*' --agent claude-code
+
+
+
+تحذير: لا تحذف الاسم القديم لو زملاؤك أو Pull Requests ما زالوا يعتمدون عليه.
+
+13. التحقق النهائي
+git branch -vv
+git status
+git log --oneline --graph -10
+
+ملاحظات مهمة
+لا تضف ملفات الـ logs مثل Backend/django_error.log إلى Git إلا لو عندك سبب واضح.
+لا تستخدم git reset --hard أو git push --force بدون التأكد من تأثيرهما.
+قبل الدمج النهائي إلى main، اختبر المشروع وراجع التغييرات.
+لإنشاء Pull Request على GitHub، اختَر: Base: main Compare: اسم الـ branch الجديد

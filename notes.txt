@@ -1,0 +1,9 @@
+https://hub.docker.com/r/jenkins/jenkins
+----------------------------------------------------
+docker run -d -p 8081:8080 -p 5000:5000 -v jenkins_home:/var/jenkins_home --name jenkins --restart always jenkins/Jenkins
+docker ps 
+docker logs Jenkins
+
+admin 
+5427991e2eea437fabea9381558d9fb1
+admin@admin.com
